@@ -28,11 +28,11 @@ from rime.basic import consts
 from rime.basic import codes as basic_codes
 from rime.core  import codes
 
-class CCode(basic_codes.CCode):
-  def __init__(self, src_name, src_dir, out_dir, flags=[]):
+class CCode(codes.registry.CCode):
+  def __init__(self, src_name, src_dir, out_dir, flags=['-lm']):
     super(CCode, self).__init__(src_name, src_dir, out_dir, ['-O2'] + flags)
 
-class CXXCode(basic_codes.CXXCode):
+class CXXCode(codes.registry.CXXCode):
   EXTENSIONS = ['cc', 'cxx', 'cpp']
   def __init__(self, src_name, src_dir, out_dir, flags=[]):
     super(CXXCode, self).__init__(src_name, src_dir, out_dir, ['-O2'] + flags)
