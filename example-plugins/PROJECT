@@ -3,3 +3,4 @@
 ## You can load plugins here.
 #use_plugin('pack_mjudge')
 use_plugin('gcc_extra')
+use_plugin('support_env')
