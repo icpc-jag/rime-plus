@@ -5,4 +5,5 @@
 use_plugin('gcc_extra')   # -O2, c++11, c++14
 use_plugin('support_env') # /usr/bin/env
 use_plugin('fast_test')   # enable parallel TLE check at the expense of precision
+use_plugin('challenge_pattern')   # enable patterns in challenge cases
 
