@@ -65,8 +65,8 @@ class Testset(targets.registry.Testset):
         for testcase in testcases],
         unsafe_interrupt=True)
     if not result.IsFinalized():
-      result.Finalize(True,
-                      'Expectedly failed at least one challenge case')
+      result.Finalize(False,
+                      'Unexpectedly accepted all challenge cases')
     yield result
 
   @taskgraph.task_method
@@ -93,6 +93,8 @@ class Testset(targets.registry.Testset):
     ui.console.PrintAction('TEST', solution,
                            '%s: PASSED' % os.path.basename(testcase.infile),
                            progress=True)
+    result.Finalize(True,
+                    'Expectedly failed at least one challenge case')
     yield True
 
 
