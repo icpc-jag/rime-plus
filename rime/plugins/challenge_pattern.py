@@ -66,8 +66,34 @@ class Testset(targets.registry.Testset):
         unsafe_interrupt=True)
     if not result.IsFinalized():
       result.Finalize(True,
-                      'Expectedly failed all challenge cases')
+                      'Expectedly failed at least one challenge case')
     yield result
+
+  @taskgraph.task_method
+  def _TestSolutionWithChallengeCasesOne(self, solution, testcase, result, ui):
+    """Test a wrong solution which has explicitly-specified challenge cases."""
+    case_result = yield self._TestOneCase(solution, testcase, ui)
+    result.results[testcase] = case_result
+    if case_result.verdict == test.TestCaseResult.AC:
+      ui.console.PrintAction('TEST', solution,
+                           '%s: Unexpectedly accepted' % os.path.basename(testcase.infile),
+                           progress=True)
+      yield False
+    elif case_result.verdict not in (test.TestCaseResult.WA,
+                                     test.TestCaseResult.TLE,
+                                     test.TestCaseResult.RE):
+      result.Finalize(False,
+                      '%s: Judge Error' % os.path.basename(testcase.infile),
+                      notable_testcase=testcase)
+      ui.errors.Error(solution, result.detail)
+      if ui.options.keep_going:
+        yield False
+      else:
+        raise taskgraph.Bailout([False])
+    ui.console.PrintAction('TEST', solution,
+                           '%s: PASSED' % os.path.basename(testcase.infile),
+                           progress=True)
+    yield True
 
 
 targets.registry.Override('Testset', Testset)
