@@ -8,4 +8,5 @@ use_plugin('fast_test')   # enable parallel TLE check at the expense of precisio
 use_plugin('challenge_pattern')   # enable patterns in challenge cases
 use_plugin('testlib_checker') # use testlib.h for a judge
 use_plugin('result_cache')    # result cache
+use_plugin('improve_keep_going')  # improve messages when using keep_going
 
