@@ -1,6 +1,6 @@
 ***This repository had been frozen***
 
-ここは[rime](https://github.com/icpc-jag/rime)のプラグインrime+は本家レポジトリに取り込まれました。
+[rime](https://github.com/icpc-jag/rime)のプラグインrime+は本家レポジトリに取り込まれました。
 
 今後のissue, pull requestはrime本家をご利用ください。
 
